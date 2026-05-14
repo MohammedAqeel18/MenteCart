@@ -1,18 +1,18 @@
 import mongoose from "mongoose";
-import { type } from "node:os";
-import { string } from "zod";
-import { required } from "zod/mini";
+
+
+
 
 const serviceSchema = new mongoose.Schema(
     {
         title:{
-            type:string,
+            type:String,
             required:true,
             trim: true,
         },
 
         descreption:{
-            type: string,
+            type: String,
             required:true,
         },
 
@@ -28,12 +28,12 @@ const serviceSchema = new mongoose.Schema(
 },
 
         category:{
-            type:string,
+            type:String,
             required: true,
         },
 
         image:{
-            type: string,
+            type: String,
             required: true,
         },
 

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import { string } from "zod";
-import { required } from "zod/mini";
+
+
 
 const cartItemsSchema = new mongoose.Schema(
     {
@@ -11,12 +11,12 @@ const cartItemsSchema = new mongoose.Schema(
         },
 
         date:{
-            type: string,
+            type: String,
             required: true,
         },
 
         timeSlot:{
-            type: string,
+            type: String,
             required: true,
         },
 

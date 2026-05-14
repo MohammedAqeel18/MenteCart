@@ -1,7 +1,5 @@
 import mongoose from "mongoose";
-import { type } from "node:os";
-import { email, lowercase } from "zod";
-import { required } from "zod/mini";
+
 
 const userSchema = new mongoose.Schema(
     {

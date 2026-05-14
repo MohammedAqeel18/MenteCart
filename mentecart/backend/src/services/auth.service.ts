@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import {User} from "../models/user.model";
 import { generateToken } from "../utils/generateToken";
-import { email } from "zod";
+
 
 
 export const  signupUser = async (
