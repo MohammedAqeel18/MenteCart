@@ -42,7 +42,7 @@ export const getServiceById = async (
 
     try{
         const service = await getSingleService(
-            req.params.id
+            req.params.id as string
         );
 
         res.status(200).json({
