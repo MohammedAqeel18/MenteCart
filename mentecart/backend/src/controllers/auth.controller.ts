@@ -1,4 +1,7 @@
 import { Request, Response } from "express";
+import { AuthRequest } from "../middleware/auth.middleware";
+import{getCurrentUser} from "../services/auth.service";
+
 
 import {
     loginUser,
@@ -56,6 +59,30 @@ export const login = async(
         res.status(400).json({
             success: false,
             message: error.message,
+        });
+    }
+};
+
+
+export const getUser = async(
+    req: AuthRequest,
+    res: Response
+) => {
+
+    try{
+        const user = await getCurrentUser(
+            req.userId as string
+        );
+
+        res.status(200).json({
+
+            success:true,
+            data:user,
+        });
+    }catch(error: any){
+        res.status(400).json({
+            success:false,
+            message:error.message,
         });
     }
 };

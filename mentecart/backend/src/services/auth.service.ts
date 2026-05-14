@@ -3,6 +3,7 @@ import {User} from "../models/user.model";
 import { generateToken } from "../utils/generateToken";
 import { email } from "zod";
 
+
 export const  signupUser = async (
     name:string,
     email: string,
@@ -31,6 +32,8 @@ export const  signupUser = async (
     };
 };
 
+
+
 export const loginUser = async (
     email: string,
     password: string
@@ -57,3 +60,20 @@ export const loginUser = async (
         user,
     };
 };
+
+
+export const getCurrentUser = async(
+    userId: string 
+)=> {
+
+    const user = await User.findById(userId).select(
+        "-password"
+    );
+
+    if(!user){
+        throw new Error("User not found");
+    }
+
+    return user;
+
+}
