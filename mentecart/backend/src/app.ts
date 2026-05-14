@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 import cors from "cors";
 import { connectDB } from "./config/db";
 import authRoutes from "./routes/auth.route";
+import serviceRoutes from "./routes/service.routes";
+
 
 dotenv.config();
 
@@ -15,6 +17,8 @@ app.use(express.json());
 
 
 app.use("/api/auth", authRoutes);
+
+app.use("/api/services", serviceRoutes);
 
 app.get("/", (req,res)=>{
     res.json({
