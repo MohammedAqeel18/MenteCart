@@ -1,6 +1,6 @@
 import express from "express";
 
-import { checkout } from "../controllers/booking.controller";
+import { checkout,getBookings,getBooking,cancel } from "../controllers/booking.controller";
 
 import { protect } from "../middleware/auth.middleware";
 
@@ -11,5 +11,11 @@ router.post(
     protect,
     checkout
 );
+
+router.get("/", protect, getBookings);
+
+router.get("/:id", protect,getBooking);
+
+router.post("/:id/cancel", protect, cancel);
 
 export default router;

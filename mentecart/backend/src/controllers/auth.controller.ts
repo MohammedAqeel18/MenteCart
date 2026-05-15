@@ -12,40 +12,31 @@ import {
     loginSchema,
     signupSchema,
 } from "../validators/auth.validators";
-import { success } from "zod";
 
-export const signup = async (
-    req: Request,
-    res: Response
-)=> {
-    try{
-        const validateData = signupSchema.parse(req.body);
+import { asyncHandler } from "../utils/asyncHandler";
+
+export const signup = asyncHandler(
+    async (req:Request , res: Response) => {
+        const validatedData = signupSchema.parse(req.body);
 
         const result = await signupUser(
-            validateData.name,
-            validateData.email,
-            validateData.password
+            validatedData.name,
+            validatedData.email,
+            validatedData.password
         );
 
         res.status(201).json({
-            success: true,
-            data: result,
-        });
-    }catch(error:any){
-        res.status(400).json({
-            success: false,
-            message: error.message,
+            success:true,
+            data:result,
         });
     }
-};
+);
 
-export const login = async(
-    req: Request,
-    res: Response
-) =>{
-    try {
-        const validatedData = loginSchema.parse(req.body);
-
+export const login = asyncHandler(
+    async (req:Request, res:Response) => {
+        const validatedData = 
+        loginSchema.parse(req.body);
+        
         const result = await loginUser(
             validatedData.email,
             validatedData.password
@@ -55,13 +46,8 @@ export const login = async(
             success:true,
             data:result,
         });
-    } catch(error: any){
-        res.status(400).json({
-            success: false,
-            message: error.message,
-        });
     }
-};
+);
 
 
 export const getUser = async(

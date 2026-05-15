@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import {User} from "../models/user.model";
 import { generateToken } from "../utils/generateToken";
-
+import { AppError } from "../utils/AppError";
 
 
 export const  signupUser = async (
@@ -41,7 +41,7 @@ export const loginUser = async (
     const user = await User.findOne({ email});
 
     if (!user){
-        throw new Error("Invalid credintials");
+        throw new AppError("Invalid credintials", 401);
     }
 
     const isPasswordMatched = await bcrypt.compare(
@@ -50,7 +50,7 @@ export const loginUser = async (
     );
 
     if(!isPasswordMatched){
-        throw new Error("Invalid Credentials");
+        throw new AppError("Invalid Credentials", 401);
     }
 
     const token = generateToken(user._id.toString());
