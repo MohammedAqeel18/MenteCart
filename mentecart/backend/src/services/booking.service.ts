@@ -2,65 +2,61 @@ import { Booking } from "../models/booking.model";
 import { Cart } from "../models/cart.model";
 import { Slot } from "../models/slot.model";
 
-export const checkoutBooking = async(
+export const checkoutBooking = async (
     userId: string
 ) => {
     const cart = await Cart.findOne({
-        user:userId,
-    });
+        user: userId,
+    }).populate("items.service");
 
-    if(!cart){
-        throw new Error("Cart is empty")
-    }
-
-    if(cart.items.length === 0){
+    if(!cart || cart.items.length === 0){
         throw new Error("Cart is empty");
     }
 
     let totalAmount = 0;
 
     for(const item of cart.items){
-        const slot = 
-            await Slot.findOneAndUpdate(
-                {
-                    service:item.service,
-                    date:item.date,
-                    timeSlot: item.timeSlot,
-                    remainingCapacity:{
-                        $gte: item.quantity,
-                    },
+        const updatedSlot = 
+        await Slot.findOneAndUpdate(
+            {
+                service:item.service._id,
+                date: item.date,
+                timeSlot:item.timeSlot,
+                remainingCapacity:{
+                    $gte: item.quantity,
                 },
-                {
-                    $inc:{
-                        remainingCapacity: -item.quantity,
-                    },
+            },
+            {
+                $inc :{
+                    remainingCapacity: -item.quantity,
                 },
-                {
-                    new: true,
-                }
-            );
+            },
 
-            if(!slot){
-                throw new Error(
-                    `Slot unavailable for ${item.timeSlot}`
-                );
+            {
+                new : true,
             }
+        );
 
-            totalAmount += item.price * item.quantity;
+        if(!updatedSlot){
+            throw new Error(
+                `slot unavailable for ${item.timeSlot}`
+            );
+        }
+        totalAmount += item.price *item.quantity;
     }
 
     const booking = await Booking.create({
         user:userId,
-        items:cart.items,
+        items: cart.items,
         totalAmount,
-        status: "confirmed",
-        paymentMethod:"cash",
-        paymentStatus:"pending",
-    });
+        status:"confirmed",
+        paymentMethod :"cash",
+        paymentStatus :"pending",
+        });
 
-    cart.items = [];
+        cart.items.splice (0, cart.items.length);
 
-    await cart.save();
+        await cart.save();
 
-    return booking;
-};
+        return booking;
+}

@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
 
-
 const cartItemsSchema = new mongoose.Schema(
     {
         service:{

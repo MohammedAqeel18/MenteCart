@@ -3,9 +3,9 @@ import mongoose from "mongoose";
 
 const slotSchema = new mongoose.Schema(
     {
-        service:{
+        service: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Service",
+            ref:"Service",
             required:true,
         },
 
@@ -15,33 +15,33 @@ const slotSchema = new mongoose.Schema(
         },
 
         timeSlot: {
-            type:String,
+            type: String,
             required:true,
         },
 
         remainingCapacity: {
-            type:Number,
-            required:true,
+            type: Number,
+            required: true,
+            min:0,
         },
     },
     {
         timestamps:true,
     }
 );
+slotSchema.index(
+    {
+        service: 1,
+        date:1,
+        timeSlot:1,
+    },
 
-slotSchema.index({
-    service:1,
-    date:1,
-    timeSlot:1,
-});
-
-slotSchema.index({
-    service:1,
-    date:1,
-    timeSlot:1,
-});
+    {
+        unique:true,
+    }
+);
 
 export const Slot = mongoose.model(
     "slot",
     slotSchema
-);
+)

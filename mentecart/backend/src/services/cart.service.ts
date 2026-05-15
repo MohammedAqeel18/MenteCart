@@ -43,10 +43,13 @@ export const addItemToCart = async(
 
     const existingItem = cart.items.find(
         (item: any) =>
-            item.service.toString() == serviceId &&
-            item.data === date &&
-            item.timeSlot === timeSlot
-        
+        (
+           item.service._id
+            ? item.service._id.toString()
+            :item.service.toString()
+        )=== serviceId && 
+          item.date === date &&
+          item.timeSlot === timeSlot  
     );
 
     if(existingItem){

@@ -5,7 +5,7 @@ import { connectDB } from "./config/db";
 import authRoutes from "./routes/auth.route";
 import serviceRoutes from "./routes/service.routes";
 import cartRoutes from "./routes/cart.routes";
-
+import bookingRoutes from "./routes/booking.routes";
 dotenv.config();
 
 const app = express();
@@ -21,6 +21,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/services", serviceRoutes);
 
 app.use("/api/cart", cartRoutes);
+
+app.use("/api/bookings", bookingRoutes);
 
 app.get("/", (req,res)=>{
     res.json({

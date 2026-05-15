@@ -11,6 +11,6 @@ const router = express.Router();
 
 router.get("/", protect, getUserCart);
 
-router.post("/", protect, addCartItem);
+router.post("/items", protect, addCartItem);
 
 export default router;
