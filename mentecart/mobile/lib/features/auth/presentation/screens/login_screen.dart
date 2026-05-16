@@ -62,12 +62,12 @@ class _LoginScreenState extends State<LoginScreen> {
                             password: passwordController.text,
                           ),
                         );
-                  },                                    // ← closed here
+                  },                                  
                   child: state is AuthLoading
                       ? const CircularProgressIndicator()
                       : const Text("Login"),
                 ),
-                TextButton(                             // ← moved outside ElevatedButton
+                TextButton(                            
                   onPressed: () {
                     Navigator.push(
                       context,
