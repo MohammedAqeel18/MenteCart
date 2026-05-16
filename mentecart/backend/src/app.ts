@@ -6,8 +6,11 @@ import authRoutes from "./routes/auth.route";
 import serviceRoutes from "./routes/service.routes";
 import cartRoutes from "./routes/cart.routes";
 import bookingRoutes from "./routes/booking.routes";
+import paymentRoutes from "./routes/payment.routes";
 import { errorHandler } from "./middleware/error.middleware";
 import loggerMiddleware from "./middleware/loggerMiddleware";
+
+
 
 dotenv.config();
 
@@ -28,6 +31,7 @@ app.use("/api/cart", cartRoutes);
 
 app.use("/api/bookings", bookingRoutes);
 
+app.use("/api/payments", paymentRoutes);
 app.get("/", (req,res)=>{
     res.json({
         message:" MenteCart API running"
