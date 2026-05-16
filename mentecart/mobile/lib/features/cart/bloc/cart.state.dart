@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:mobile/features/cart/data/models/cart_model.dart'; 
 
 abstract class CartState extends Equatable {
   @override
@@ -17,5 +18,16 @@ class CartError extends CartState {
   CartError(this.message);
 
   @override
-  List<Object> get props => [message];
+  List<Object> get props => [message];  
+}                                        
+
+class CartLoaded extends CartState {
+  final List<CartItemModel> items;
+
+  CartLoaded(this.items);
+
+  @override
+  List<Object> get props => [items];
 }
+
+class CheckoutSuccess extends CartState {}

@@ -22,4 +22,22 @@ class AddCartItem extends CartEvent {
 
   @override
   List<Object> get props => [token, serviceId, date, timeSlot, quantity];
+}                                       
+
+class FetchCartItems extends CartEvent {
+  final String token;
+
+  FetchCartItems({required this.token});
+
+  @override
+  List<Object> get props => [token];
+}
+
+class CheckoutCart extends CartEvent {
+  final String token;
+
+  CheckoutCart({required this.token});
+
+  @override
+  List<Object> get props => [token];
 }
