@@ -7,6 +7,7 @@ import serviceRoutes from "./routes/service.routes";
 import cartRoutes from "./routes/cart.routes";
 import bookingRoutes from "./routes/booking.routes";
 import { errorHandler } from "./middleware/error.middleware";
+import loggerMiddleware from "./middleware/loggerMiddleware";
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ const app = express();
 connectDB();
 
 app.use(cors());
+app.use(loggerMiddleware);
 app.use(express.json());
 
 
