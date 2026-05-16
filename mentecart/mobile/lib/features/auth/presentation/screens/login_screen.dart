@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:mobile/features/auth/bloc/auth_bloc.dart';
+import 'package:mobile/features/home/presentation/screens/home.screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -33,15 +34,23 @@ class _LoginScreenState
         child: BlocConsumer<AuthBloc,
             AuthState>(
           listener: (context, state) {
-            if (state is AuthSuccess) {
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(
-                const SnackBar(
-                  content:
-                      Text("Login Success"),
-                ),
-              );
-            }
+           if (state is AuthSuccess) {
+
+  ScaffoldMessenger.of(context)
+      .showSnackBar(
+    const SnackBar(
+      content: Text("Login Success"),
+    ),
+  );
+
+  Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(
+      builder: (_) =>
+          const HomeScreen(),
+    ),
+  );
+}
 
             if (state is AuthFailure) {
               ScaffoldMessenger.of(context)

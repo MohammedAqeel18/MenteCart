@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/features/cart/bloc/cart_event.dart';
 import 'package:mobile/features/cart/bloc/cart_bloc.dart';       
-import 'package:mobile/features/cart/data/repoaitories/cart_repository.dart';
+import 'package:mobile/features/cart/data/repositories/cart_repository.dart';
 
 export 'cart_event.dart';
 export 'cart.state.dart';                                              
