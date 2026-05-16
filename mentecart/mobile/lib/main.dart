@@ -6,6 +6,8 @@ import 'package:mobile/features/auth/data/repositories/auth_repository.dart';
 import 'package:mobile/features/services/bloc/service_bloc.dart';
 import 'package:mobile/features/services/data/repositories/service_repository.dart';
 import 'package:mobile/features/services/presentation/screen/services_screen.dart';
+import 'package:mobile/features/cart/bloc/cart_bloc.dart';
+import 'package:mobile/features/cart/data/repoaitories/cart_repository.dart';
 
 void main(){
   runApp(const MyApp());
@@ -31,7 +33,13 @@ Widget build(BuildContext context){
             ServiceRepository(),
           ),
     ),
+
+    BlocProvider(
+  create: (_) =>
+      CartBloc(CartRepository()),
+),
   ],
+
 
   child: MaterialApp(
     debugShowCheckedModeBanner: false,
