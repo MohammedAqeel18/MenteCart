@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,7 +9,8 @@ import 'package:mobile/features/services/data/repositories/service_repository.da
 import 'package:mobile/features/services/presentation/screen/services_screen.dart';
 import 'package:mobile/features/cart/bloc/cart_bloc.dart';
 import 'package:mobile/features/cart/data/repoaitories/cart_repository.dart';
-
+import 'package:mobile/features/bookings/bloc/booking_bloc.dart';
+import 'package:mobile/features/bookings/data/repositories/booking_repository.dart';
 void main(){
   runApp(const MyApp());
 }
@@ -37,6 +39,13 @@ Widget build(BuildContext context){
     BlocProvider(
   create: (_) =>
       CartBloc(CartRepository()),
+),
+
+BlocProvider(
+  create: (_) =>
+      BookingBloc(
+        BookingRepository(),
+      ),
 ),
   ],
 
