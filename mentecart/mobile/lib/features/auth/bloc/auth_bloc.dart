@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/features/auth/bloc/auth_event.dart';
 import 'package:mobile/features/auth/bloc/auth_state.dart';
 import 'package:mobile/features/auth/data/repositories/auth_repository.dart';
+import 'package:mobile/core/utils/storage_service.dart';
 
 export  'auth_event.dart';
 export  'auth_state.dart';
@@ -31,6 +32,7 @@ class AuthBloc
           password: event.password,
         );
 
+    await StorageService.saveToken(token);
         emit(AuthSuccess(token));
       }catch(e) {
         emit(AuthFailure(e.toString()));

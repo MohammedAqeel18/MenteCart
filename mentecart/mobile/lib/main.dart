@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:mobile/features/auth/bloc/auth_bloc.dart';
 import 'package:mobile/features/auth/data/repositories/auth_repository.dart';
-import 'package:mobile/features/auth/presentation/screens/login_screen.dart';
+import 'package:mobile/features/auth/presentation/screens/splash_screen.dart';
 
 void main(){
   runApp(const MyApp());
@@ -20,7 +20,7 @@ Widget build(BuildContext context){
 
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: const LoginScreen(),
+          home: const SplashScreen(),
         ),
   );
 }
